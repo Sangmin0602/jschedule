@@ -78,6 +78,13 @@
 	</dependencies>
     <build>
         <plugins>
+        	<plugin>
+        		<artifactId>maven-war-plugin</artifactId>
+        		<version>2.3</version>
+        		<configuration>
+        			<warSourceDirectory>webContents</warSourceDirectory>
+        		</configuration>
+        	</plugin>
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
                 <version>2.9</version>
