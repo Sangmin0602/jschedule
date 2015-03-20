@@ -1,8 +1,8 @@
 <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page session="false" %>
+<%@ page session="false" pageEncoding="utf-8"%>
 <html>
 <head>
-	<title>Home</title>
+	<title>홈테스트</title>
 </head>
 <body>
 <h1>
