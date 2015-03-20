@@ -6,8 +6,8 @@
 	<version>${jschedule.version}</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>Jschedule-Core</module>
-		<module>Jschedule-web</module>
+		<module>JSchedule-Core</module>
+		<module>JSchedule-Web</module>
 	</modules>
 	<properties>
 		<jschedule.version>0.0.5-SNAPSHOT</jschedule.version>

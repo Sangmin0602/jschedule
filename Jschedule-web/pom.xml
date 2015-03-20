@@ -2,16 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>github.sangmin0602</groupId>
-	<artifactId>schedule</artifactId>
-	<name>Jschedule-web</name>
+	<groupId>github.sangmin0602.schedule.web</groupId>
+	<name>JSchedule-Web</name>
 	<packaging>war</packaging>
 	<version>${jschedule.version}</version>
 	<parent>
-    <groupId>github.sangmin0602.schedule</groupId>
-    <artifactId>Jschedule</artifactId>
-    <version>${jschedule.version}</version>
-  </parent>
+		<groupId>github.sangmin0602.schedule</groupId>
+		<artifactId>Jschedule</artifactId>
+		<version>${jschedule.version}</version>
+	</parent>
 	<properties>
 		<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
@@ -115,4 +114,5 @@
             </plugin>
         </plugins>
     </build>
+    <artifactId>Jschedule-Web</artifactId>
 </project>

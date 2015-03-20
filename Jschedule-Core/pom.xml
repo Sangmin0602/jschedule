@@ -9,9 +9,9 @@
 		<version>${jschedule.version}</version>
 	</parent>
 	<groupId>github.sangmin0602.schedule.core</groupId>
-	<artifactId>Jschedule-Core</artifactId>
+	<artifactId>JSchedule-Core</artifactId>
 	<version>${jschedule.version}</version>
-	<name>Jschedule-Core</name>
+	<name>JSchedule-Core</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
