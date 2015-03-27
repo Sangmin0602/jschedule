@@ -1,6 +1,7 @@
 <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page session="false" pageEncoding="utf-8"%>
 <c:set var="ctxpath" value="${pageContext.servletContext.contextPath }"></c:set>
+<c:set var="user" value="${user}"/>
 <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
@@ -16,7 +17,8 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="${ctxpath}">Home</a></li>
-				<li><a href="#">Login</a></li>
+				<li><c:if test="${empty user}"><a href="" data-target="#LoginPanel" class="btn" data-toggle="modal">Login</a></c:if>
+				<c:if test="${not empty user}"><a href="logout" class="btn">Logout</a></c:if></li>
 				<li class="dropdown"><a class="dropdown-toggle"	data-toggle="dropdown" role="button" aria-expanded="false"href="${ctxpath}/view">일정<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="${ctxpath}/view/month">월단위</a></li>
@@ -51,3 +53,32 @@
 	</div>
 	<!--/.container-fluid -->
 </nav>
+<div id="LoginPanel" class="modal fade" tabindex="-1" role="dialog"
+	aria-labelledby="loginHeader">
+	<div class="modal-dialog login-box-size">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">×</button>
+				<h3 id="loginHeader">로그인</h3>
+			</div>
+			<div class="modal-body">
+				<form id="frmLogin" role="form">
+					<div class="form-group">
+						<input class="form-control" id="userid" name="userid" type="text" placeHolder="your@email.here"/>
+						<span class="help-block"></span>
+					</div>
+					<div class="form-group">
+						<input class="form-control" id="pass"  name="pass" type="password" placeHolder="비밀번호"/>
+						<span class="help-block"></span>
+					</div>
+					<button type="button" id="btnLogin" class="btn btn-success">로그인</button>
+				</form>
+			</div>
+			<!-- 
+			<div class="modal-footer">
+			</div>
+			 -->
+		</div>
+	</div>
+</div>

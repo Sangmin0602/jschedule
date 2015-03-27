@@ -1,0 +1,5 @@
+@CHARSET "UTF-8";
+body .login-box-size {
+    /* new custom width */
+    width: 300px;
+}
