@@ -9,6 +9,8 @@ public class UserVO {
 	private String whenJoined;
 	
 	
+	public UserVO(){}
+	
 	public UserVO(Integer seq, String nickName, String email, String password,
 			String whenJoined) {
 		super();

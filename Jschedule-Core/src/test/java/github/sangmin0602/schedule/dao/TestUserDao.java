@@ -1,7 +1,11 @@
 package github.sangmin0602.schedule.dao;
 
 import static org.junit.Assert.*;
+import static github.sangmin0602.schedule.TestUtils.*;
+
+
 import github.sangmin0602.schedule.SpringBasedTestCase;
+import github.sangmin0602.schedule.UserVO;
 
 import org.junit.After;
 import org.junit.Before;
@@ -21,7 +25,9 @@ public class TestUserDao extends SpringBasedTestCase{
 	@Test
 	public void test_findbySeq() {
 		UserDao userDao = ctx.getBean(UserDao.class);
-		assertNotNull ( userDao.findBySeq(1000));
+		UserVO james = userDao.findBySeq(1);
+		assertNotNull (james );
+		assertPropertyNotNull(james, new String[0]);
 	}
 
 }

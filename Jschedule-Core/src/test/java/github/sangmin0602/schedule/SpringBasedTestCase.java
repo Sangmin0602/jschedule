@@ -27,10 +27,4 @@ public class SpringBasedTestCase {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
-	public void test_find_beans() {
-		UserDao dao = ctx.getBean(UserDao.class);
-		assertNotNull(dao.findBySeq(1000));
-	}
-
 }
