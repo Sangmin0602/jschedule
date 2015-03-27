@@ -7,6 +7,20 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
-	<!-- <mybatis:scan base-package="github.sangmin0602.schedule"/> -->
+	<mybatis:scan base-package="github.sangmin0602.schedule"/>
 	<context:component-scan base-package="github.sangmin0602.schedule"></context:component-scan>
+	<context:property-placeholder location="classpath:db/dbconn.properties" /> 
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${dev.driver}" />
+        <property name="url" value="${dev.url}" />
+        <property name="username" value="${dev.user}" />
+        <property name="password" value="${dev.pass}" />
+	</bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:db/mybatis-config.xml"></property>
+        <!-- <property name="mapperLocations" value="classpath:db/mybatis/*.xml" /> -->
+ 	</bean>
 </beans>
