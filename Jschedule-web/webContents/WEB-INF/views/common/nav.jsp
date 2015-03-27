@@ -16,9 +16,9 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="${ctxpath}">Home</a></li>
-				<li><c:if test="${empty user}"><a href="" data-target="#LoginPanel" class="btn" data-toggle="modal">Login</a></c:if>
-				<c:if test="${not empty user}"><a href="logout" class="btn">Logout</a></c:if></li>
+				<li><a href="${ctxpath}">Home</a></li>
+				<li><c:if test="${empty user}"><a href="" data-target="#LoginPanel" data-toggle="modal">Login</a></c:if>
+				<c:if test="${not empty user}"><a href="logout">Logout</a></c:if></li>
 				<li class="dropdown"><a class="dropdown-toggle"	data-toggle="dropdown" role="button" aria-expanded="false"href="${ctxpath}/view">일정<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="${ctxpath}/view/month">월단위</a></li>
@@ -44,9 +44,7 @@
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
-				<li><a href="../navbar-static-top/">Static top</a></li>
-				<li><a href="../navbar-fixed-top/">Fixed top</a></li>
+				<li><button class="btn btn-primary header-btn">가입 </button></li>
 			</ul>
 		</div>
 		<!--/.nav-collapse -->

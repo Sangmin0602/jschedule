@@ -14,6 +14,6 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 <!-- Bootstrap core CSS -->
-<link href="${ctxpath}/resources/css/app-ui.css" rel="stylesheet">
 <link href="${ctxpath}/resources/css/bootstrap.css" rel="stylesheet">
 <link href="${ctxpath}/resources/css/navbar.css" rel="stylesheet">
+<link href="${ctxpath}/resources/css/app-ui.css" rel="stylesheet">

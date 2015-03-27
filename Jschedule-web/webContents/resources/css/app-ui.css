@@ -3,3 +3,13 @@ body .login-box-size {
     /* new custom width */
     width: 300px;
 }
+
+.header-btn {
+	margin-top: 8px;
+	margin-bottom:0;
+}
+
+.navbar-right {
+	margin-right: 0;
+	margin-botton : 0;
+}
