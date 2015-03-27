@@ -5,5 +5,5 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<import resource="classpath:schedule-core.xml"/>
-	<bean id="userDao" class="github.sangmin0602.schedule.UserDao"></bean>
+	<bean id="userDao" class="github.sangmin0602.schedule.dao.UserDao"></bean>
 </beans>
