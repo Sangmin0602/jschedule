@@ -26,5 +26,8 @@ public class SpringBasedTestCase {
 	@After
 	public void tearDown() throws Exception {
 	}
+	
+	@Test
+	public void dunny() {}
 
 }
