@@ -29,5 +29,43 @@ public class TestUserDao extends SpringBasedTestCase{
 		assertNotNull (james );
 		assertPropertyNotNull(james, new String[0]);
 	}
-
+	
+	@Test
+	public void test_login() {
+		UserDao userDao = ctx.getBean(UserDao.class);
+		UserVO user = userDao.login( "james@e.mail", "1111");
+		assertNotNull( user );
+		assertPropertyNotNull(user);
+	}
+	
+	@Test
+	public void test_when_invalidLoginInfo() {
+		UserDao userDao = ctx.getBean(UserDao.class);
+		UserVO user = userDao.login( "james@e.mail", "112332");
+		assertNull( user );
+	}	
+	
+	@Test
+	public void test_insert_new_user() {
+		UserVO newUser = new UserVO();
+		newUser.setEmail("e@m.ail");
+		newUser.setNickName("newmember");
+		newUser.setPassword("1111");
+		
+		UserDao userDao = ctx.getBean(UserDao.class);
+		newUser = userDao.insert(newUser);
+		
+	}
+	
+	@Test(expected=DaoException.class)
+	public void test_duplicated_email() {
+		UserVO newUser = new UserVO();
+		newUser.setEmail("james@e.mail");
+		newUser.setNickName("newmember");
+		newUser.setPassword("1111");
+		
+		UserDao userDao = ctx.getBean(UserDao.class);
+		newUser = userDao.insert(newUser);
+	}
+	
 }

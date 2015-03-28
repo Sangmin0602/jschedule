@@ -9,4 +9,16 @@
 		FROM Users
 		WHERE seq = #{id}
 	</select>
+	<select id="getLogin" parameterType="HashMap" resultType="User">
+		SELECT
+			seq, nickname, email, password, when_joined as whenJoined
+		FROM Users
+		WHERE email = #{email} AND password = #{pass}
+		<!-- 
+		<where>
+			<if test="email != null"> email = #{email}</if>
+			<if test="pass != null"> and password = #{pass}</if>
+		</where>
+		 -->
+	</select>
 </mapper>
