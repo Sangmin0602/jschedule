@@ -7,7 +7,6 @@
 	<title>Navbar Template for Bootstrap</title>
 	<jsp:include page="/WEB-INF/views/common/common-head.jsp"></jsp:include>
 </head>
-
 <body>
 	<div class="container">
 		<jsp:include page="/WEB-INF/views/common/nav.jsp"></jsp:include>

@@ -1,5 +1,5 @@
 <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page session="false" pageEncoding="utf-8"%>
+<%@ page pageEncoding="utf-8"%>
 <c:set var="ctxpath" value="${pageContext.servletContext.contextPath }"></c:set>
 <c:set var="user" value="${user}"/>
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -30,7 +30,7 @@
 						<li><a href="#">Separated link</a></li>
 						<li><a href="#">One more separated link</a></li>
 						 -->
-					</ul></li>
+					</ul>
 				</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
@@ -44,7 +44,8 @@
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><button class="btn btn-primary header-btn">가입 </button></li>
+				<c:if test="${empty user}"><li><button class="btn btn-primary header-btn">가입</button></li></c:if>
+				<c:if test="${not empty user}"><li><button class="btn btn-primary header-btn" >${user.email}</button></c:if>
 			</ul>
 		</div>
 		<!--/.nav-collapse -->
@@ -62,6 +63,7 @@
 			</div>
 			<div class="modal-body">
 				<form id="frmLogin" role="form">
+					<div class="alert alert-danger alert-error" id="login-error">ddd</div>
 					<div class="form-group">
 						<input class="form-control" id="userid" name="userid" type="text" placeHolder="your@email.here"/>
 						<span class="help-block"></span>

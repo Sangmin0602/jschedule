@@ -17,3 +17,7 @@
 <link href="${ctxpath}/resources/css/bootstrap.css" rel="stylesheet">
 <link href="${ctxpath}/resources/css/navbar.css" rel="stylesheet">
 <link href="${ctxpath}/resources/css/app-ui.css" rel="stylesheet">
+
+<script type="text/javascript">var ctxpath = ctxpath || "${ctxpath}";</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="${ctxpath}/resources/js/schedule/login.js" type="text/javascript"></script>
