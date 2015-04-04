@@ -45,27 +45,53 @@ public class TestUserDao extends SpringBasedTestCase{
 		assertNull( user );
 	}	
 	
+//	@Test
+//	public void test_insert_new_user() {
+//		UserVO newUser = new UserVO();
+//		newUser.setEmail("sangmin@gmail.com");
+//		newUser.setNickName("java");
+//		newUser.setPassword("1111");
+//		
+//		UserDao userDao = ctx.getBean(UserDao.class);
+//		newUser = userDao.insert(newUser);
+//		
+//	}
+	
+//	@Test
+//	public void test_update_delete() {
+//		UserVO user = new UserVO();
+//		user.setSeq(1);
+//		UserDao userDao = ctx.getBean(UserDao.class);
+//		userDao.checkAsDeleted(user);
+//		
+//	}
+	
+//	@Test
+//	public void test_delete() {
+//		UserVO user = new UserVO();
+//		UserDao userDao = ctx.getBean(UserDao.class);
+//		userDao.delete(user);
+//	}
 	@Test
-	public void test_insert_new_user() {
-		UserVO newUser = new UserVO();
-		newUser.setEmail("e@m.ail");
-		newUser.setNickName("newmember");
-		newUser.setPassword("1111");
-		
+	public void test_update() {
+		UserVO user = new UserVO();
+		user.setSeq(2);
+		user.setNickName("updatedName");
+		user.setEmail("udpated@gmail.com");
+		user.setPassword("updatedPasswd");
 		UserDao userDao = ctx.getBean(UserDao.class);
-		newUser = userDao.insert(newUser);
-		
+		userDao.update(user);
 	}
 	
-	@Test(expected=DaoException.class)
-	public void test_duplicated_email() {
-		UserVO newUser = new UserVO();
-		newUser.setEmail("james@e.mail");
-		newUser.setNickName("newmember");
-		newUser.setPassword("1111");
-		
-		UserDao userDao = ctx.getBean(UserDao.class);
-		newUser = userDao.insert(newUser);
-	}
+//	@Test(expected=DaoException.class)
+//	public void test_duplicated_email() {
+//		UserVO newUser = new UserVO();
+//		newUser.setEmail("james@e.mail");
+//		newUser.setNickName("newmember");
+//		newUser.setPassword("1111");
+//		
+//		UserDao userDao = ctx.getBean(UserDao.class);
+//		newUser = userDao.insert(newUser);
+//	}
 	
 }

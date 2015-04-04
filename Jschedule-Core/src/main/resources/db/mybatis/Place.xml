@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Place" >
+
+	<select id="placeAll" parameterType = "Integer" resultType = "Place">
+		select * from places where fk_user = #{seq}
+	</select>
+	
+	<insert id="AddPlace" parameterType = "HashMap">
+		insert into places (placename, description,fk_user)
+		values(#{place}, #{desc}, #{user})
+	</insert>
+	
+	<update id="updatePlace" parameterType = "HashMap">
+		update places set placename = #{place}, description = #{desc}, fk_user = #{user}
+		where seq = #{seq}
+	</update>
+	
+	<delete id="deletePlace" parameterType="HashMap">
+		delete from places where seq = #{seq} and fk_user = #{user_seq}
+	</delete>
+	
+</mapper>

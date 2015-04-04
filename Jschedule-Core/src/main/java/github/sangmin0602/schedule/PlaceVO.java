@@ -34,15 +34,34 @@ public class PlaceVO {
 		this.description = description;
 	}
 	
+	public Integer getOwnerSeq() {
+		return ownerSeq;
+	}
+	public void setOwnerSeq(Integer ownerSeq) {
+		this.ownerSeq = ownerSeq;
+	}
 	@Override
 	public String toString() {
 		return "PlaceVO [seq=" + seq + ", placeName=" + placeName
-				+ ", description=" + description + "]";
+				+ ", description=" + description + ", ownerSeq=" + ownerSeq
+				+ "]";
+	}
+	public PlaceVO(Integer seq, String placeName, String description,
+			Integer ownerSeq) {
+		super();
+		this.seq = seq;
+		this.placeName = placeName;
+		this.description = description;
+		this.ownerSeq = ownerSeq;
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result
+				+ ((ownerSeq == null) ? 0 : ownerSeq.hashCode());
 		result = prime * result
 				+ ((placeName == null) ? 0 : placeName.hashCode());
 		result = prime * result + ((seq == null) ? 0 : seq.hashCode());
@@ -57,6 +76,16 @@ public class PlaceVO {
 		if (getClass() != obj.getClass())
 			return false;
 		PlaceVO other = (PlaceVO) obj;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (ownerSeq == null) {
+			if (other.ownerSeq != null)
+				return false;
+		} else if (!ownerSeq.equals(other.ownerSeq))
+			return false;
 		if (placeName == null) {
 			if (other.placeName != null)
 				return false;
@@ -69,6 +98,6 @@ public class PlaceVO {
 			return false;
 		return true;
 	}
-	
+
 	
 }

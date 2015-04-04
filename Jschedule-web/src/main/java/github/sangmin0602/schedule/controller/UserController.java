@@ -1,5 +1,6 @@
 package github.sangmin0602.schedule.controller;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 

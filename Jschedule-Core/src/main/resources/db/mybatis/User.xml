@@ -2,13 +2,32 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="User">
+<mapper namespace="User" >
+	<insert id="newUser" parameterType = "HashMap">
+		INSERT INTO USERS (NICKNAME, EMAIL, PASSWORD)
+			VALUES(#{nickName}, #{email}, #{password})
+	</insert>
+	
+	<update id="updateDeleteYN" parameterType = "integer">
+		update users set deleted = 'Y' where seq = #{id}
+	</update>
+	
+	<delete id="deleteUser">
+		delete from users where deleted = "Y"
+	</delete>
+	
+	<update id="updateUser" parameterType = "HashMap">
+		update users set nickName = #{nickName}, email = #{email}, password = #{password}
+		where seq = #{seq} 	
+	</update>
+		
 	<select id="findBySeq" parameterType="integer" resultType="User">
 		SELECT
 			seq, nickname, email, password, when_joined as whenJoined
 		FROM Users
 		WHERE seq = #{id}
 	</select>
+	
 	<select id="getLogin" parameterType="HashMap" resultType="User">
 		SELECT
 			seq, nickname, email, password, when_joined as whenJoined

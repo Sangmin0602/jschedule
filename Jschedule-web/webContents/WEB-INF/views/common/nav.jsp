@@ -17,7 +17,8 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="${ctxpath}">Home</a></li>
-				<li><c:if test="${empty user}"><a href="" data-target="#LoginPanel" data-toggle="modal">Login</a></c:if>
+				<li>
+				<c:if test="${empty user}"><a href="" data-target="#LoginPanel" data-toggle="modal">Login</a></c:if>
 				<c:if test="${not empty user}"><a href="logout">Logout</a></c:if></li>
 				<li class="dropdown"><a class="dropdown-toggle"	data-toggle="dropdown" role="button" aria-expanded="false"href="${ctxpath}/view">일정<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
@@ -32,6 +33,7 @@
 						 -->
 					</ul>
 				</li>
+				<li><a href="${ctxpath}/places">내 장소</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="#">Action</a></li>
