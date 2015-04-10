@@ -7,20 +7,9 @@ import static github.sangmin0602.schedule.TestUtils.*;
 import github.sangmin0602.schedule.SpringBasedTestCase;
 import github.sangmin0602.schedule.UserVO;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 public class TestUserDao extends SpringBasedTestCase{
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		
-	}
 
 	@Test
 	public void test_findbySeq() {
@@ -45,17 +34,18 @@ public class TestUserDao extends SpringBasedTestCase{
 		assertNull( user );
 	}	
 	
-//	@Test
-//	public void test_insert_new_user() {
-//		UserVO newUser = new UserVO();
-//		newUser.setEmail("sangmin@gmail.com");
-//		newUser.setNickName("java");
-//		newUser.setPassword("1111");
-//		
-//		UserDao userDao = ctx.getBean(UserDao.class);
-//		newUser = userDao.insert(newUser);
-//		
-//	}
+	@Test
+	public void test_insert_new_user() {
+		UserVO newUser = new UserVO();
+		newUser.setEmail("sangmin@gmail.com");
+		newUser.setNickName("java");
+		newUser.setPassword("1111");
+		
+		UserDao userDao = ctx.getBean(UserDao.class);
+		newUser = userDao.insert(newUser);
+		assertEquals ( 2, userDao.countUsers());
+		
+	}
 	
 //	@Test
 //	public void test_update_delete() {
@@ -75,7 +65,7 @@ public class TestUserDao extends SpringBasedTestCase{
 	@Test
 	public void test_update() {
 		UserVO user = new UserVO();
-		user.setSeq(2);
+		user.setSeq(1);
 		user.setNickName("updatedName");
 		user.setEmail("udpated@gmail.com");
 		user.setPassword("updatedPasswd");
