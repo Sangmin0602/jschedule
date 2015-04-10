@@ -23,14 +23,14 @@
 		
 	<select id="findBySeq" parameterType="integer" resultType="User">
 		SELECT
-			seq, nickname, email, password, when_joined as whenJoined
+			seq, nickname, email, password, when_joined as whenJoined, deleted
 		FROM Users
 		WHERE seq = #{id}
 	</select>
 	
 	<select id="getLogin" parameterType="HashMap" resultType="User">
 		SELECT
-			seq, nickname, email, password, when_joined as whenJoined
+			seq, nickname, email, password, when_joined as whenJoined, deleted
 		FROM Users
 		WHERE email = #{email} AND password = #{pass}
 		<!-- 
@@ -39,5 +39,9 @@
 			<if test="pass != null"> and password = #{pass}</if>
 		</where>
 		 -->
+	</select>
+	
+	<select id="countAllUser" resultType="integer">
+		SELECT count(seq) FROM users WHERE deleted = 'N'
 	</select>
 </mapper>

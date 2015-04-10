@@ -7,45 +7,39 @@ import java.util.Map;
 import github.sangmin0602.schedule.UserVO;
 
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
+@Transactional(rollbackFor=DaoException.class)
 public class UserDao {
 	
-	private SqlSessionFactory factory ;
+	private SqlSession session ;
 	
 	@Autowired
-	public UserDao(SqlSessionFactory factory) {
-		this.factory = factory;
+	public UserDao(SqlSession session) {
+		this.session = session;
+	}
+	
+	public  UserDao(){}
+	
+	public int countUsers() throws DaoException {
+		int cnt = session.selectOne("User.countAllUser");
+		return cnt;
 	}
 	
 	public UserVO findBySeq(int seq) throws DaoException{
-		SqlSession session = factory.openSession(false);
-		
-		try {
-			UserVO user = session.selectOne("User.findBySeq", seq);
-			return user;
-			
-		} catch(Exception e){
-			throw new DaoException("fail to findBySeq : " + seq, e);
-		}finally {
-			session.close();
-		}
+		UserVO user = session.selectOne("User.findBySeq", seq);
+		return user;
 	}
 
 	public UserVO login(String email, String password) {
-		SqlSession session = factory.openSession(false);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("email", email);
 		map.put("pass", password);
-		try{
-			UserVO user = session.selectOne("User.getLogin", map);
-			return user;
-		} finally {
-			session.close();
-		}
+		UserVO user = session.selectOne("User.getLogin", map);
+		return user;
 	}
 	
 	/**
@@ -56,23 +50,15 @@ public class UserDao {
 	 */
 	public UserVO insert(UserVO newUser) throws DaoException{
 		// TEST 테스트 해야함.
-		SqlSession session = factory.openSession(false);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("nickName", newUser.getNickName());
 		map.put("email", newUser.getEmail());
 		map.put("password", newUser.getPassword());
-		try {
-			int check = session.insert("newUser", map);
-			if(check != 1) {
-				session.rollback();
-			}
-		} catch(Exception ex) {
-			ex.printStackTrace();
+		int check = session.insert("newUser", map);
+		if(check != 1) {
 			session.rollback();
-		} finally {
-			session.close();
 		}
-		return null;
+		return newUser;
 	}
 	
 	/**
@@ -83,19 +69,11 @@ public class UserDao {
 	 */
 	public UserVO checkAsDeleted ( UserVO user) throws DaoException {
 		//update시 업데이트 시간관리 어떻게 할지...
-		SqlSession session = factory.openSession(false);
-		try {
-			UserVO uservo = session.selectOne("User.findBySeq", user.getSeq());
-			if(uservo != null) {
-				session.update("updateDeleteYN", uservo.getSeq());
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			session.rollback();
-		} finally {
-			session.close();
+		UserVO uservo = session.selectOne("User.findBySeq", user.getSeq());
+		if(uservo != null) {
+			session.update("updateDeleteYN", uservo.getSeq());
 		}
-		return null;
+		return user;
 	}
 	
 	/**
@@ -108,19 +86,11 @@ public class UserDao {
 		// String  파라미터 한개만 보낼때  HashMap에 담아야하는지 다른방법이 있느지.
 		// User 삭제시 Place 테이블에 관계 있는  seq 같이 삭제
 		// 매번 try catch를 해야하는지?? 다른 방법은 없는지.
-		SqlSession session = factory.openSession(false);
-		try {
-			int deleteChk = session.delete("deleteUser");
-			if(deleteChk != 1) {
-				session.rollback();
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
+		int deleteChk = session.delete("deleteUser");
+		if(deleteChk != 1) {
 			session.rollback();
-		} finally {
-			session.close();
 		}
-		
+				
 		//Y인것만 지우는건지.
 		//UserVO uservo = session.selectOne("User.findBySeq", user.getSeq());
 		
@@ -128,7 +98,7 @@ public class UserDao {
 			//session.delete("deleteUser", user.getDeleted());
 		//}
 		
-		return null;
+		return user;
 	}
 	
 	/**
@@ -139,23 +109,15 @@ public class UserDao {
 	 * @throws DaoException
 	 */
 	public UserVO update ( UserVO user) throws DaoException {
-		SqlSession session = factory.openSession(false);
-		Map map = new HashMap();
+		Map<String, Object> map = new HashMap<>();
 		map.put("nickName", user.getNickName());
 		map.put("email", user.getEmail());
 		map.put("password", user.getPassword());
 		map.put("seq", user.getSeq());
-		try {
-			int checkUpdte = session.update("updateUser",map);
-			if(checkUpdte != 1) {
-				session.rollback();
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			session.rollback();
-		} finally {
-			session.close();
+		int checkUpdte = session.update("updateUser",map);
+		if ( checkUpdte == 0 ) {
+			throw new DaoException("fail to update user " + user);
 		}
-		return null;
+		return user;
 	}
 }
