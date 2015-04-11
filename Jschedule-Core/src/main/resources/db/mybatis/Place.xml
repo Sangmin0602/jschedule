@@ -22,4 +22,7 @@
 		delete from places where seq = #{seq} and fk_user = #{user_seq}
 	</delete>
 	
+	<select id="findByPlaceName" parameterType="String" resultType="Place">
+	select * from places where placename = #{placeName}
+	</select>
 </mapper>

@@ -56,12 +56,20 @@ public class TestUserDao extends SpringBasedTestCase{
 //		
 //	}
 	
-//	@Test
-//	public void test_delete() {
-//		UserVO user = new UserVO();
-//		UserDao userDao = ctx.getBean(UserDao.class);
-//		userDao.delete(user);
-//	}
+	@Test
+	public void test_checkAsDeleted ( ) {
+		UserVO user = new UserVO();
+		user.setSeq(1);
+		UserDao userDao = ctx.getBean(UserDao.class);
+		userDao.checkAsDeleted(user);
+	}
+	@Test
+	public void test_delete() {
+		UserVO user = new UserVO();
+		user.setSeq(1);
+		UserDao userDao = ctx.getBean(UserDao.class);
+		userDao.delete(user);
+	}
 	@Test
 	public void test_update() {
 		UserVO user = new UserVO();

@@ -14,11 +14,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class PlaceDao {
 
-	private SqlSessionFactory factory ;
+	//private SqlSessionFactory factory ;
+	private SqlSession session;
 	
 	@Autowired
-	public PlaceDao(SqlSessionFactory factory) {
-		this.factory = factory;
+	public PlaceDao(SqlSession session) {
+		this.session = session;
 	}
 	/**
 	 * 주어진 seq가 나타내는 사용자가 등록한 모든 장소들을 반환합니다.
@@ -26,13 +27,8 @@ public class PlaceDao {
 	 * @return 모든 장소를 List 로 반환함.
 	 */
 	public List<PlaceVO> allPlace(Integer userSeq) {
-		SqlSession session = factory.openSession();
-		try {
-			List<PlaceVO> list = session.selectList("placeAll", userSeq);
-			return list;
-		} finally {
-			session.close();
-		}
+		List<PlaceVO> list = session.selectList("placeAll", userSeq);
+		return list;
 	}
 	/**
 	 * 
@@ -40,29 +36,17 @@ public class PlaceDao {
 	 * @return
 	 */
 	public PlaceVO insertNewPlace ( PlaceVO newPlace) throws DaoException{
-		SqlSession session = factory.openSession(false);
 		Map map = new HashMap();
 		
 		map.put("place", newPlace.getPlaceName());
 		map.put("desc", newPlace.getDescription());
 		map.put("user", newPlace.getOwnerSeq());
 		
-		try {
-			int chk = session.insert("AddPlace", map);
-			if(chk != 1) {
-				session.rollback();
-			}
-		} catch(Exception ex) {
-			session.close();
-			ex.printStackTrace();
-		} finally {
-			session.close();
-		}
+		int chk = session.insert("AddPlace", map);
 		return null;
 	}
 	
 	public PlaceVO updatePlace ( PlaceVO place ) throws DaoException {
-		SqlSession session = factory.openSession(false);
 		Map map = new HashMap();
 		
 		map.put("place", place.getPlaceName());
@@ -70,17 +54,7 @@ public class PlaceDao {
 		map.put("user", place.getOwnerSeq());
 		map.put("seq", place.getSeq());
 		
-		try {
-			int chk = session.update("updatePlace", map);
-			if(chk != 1) {
-				session.rollback();
-			}
-		} catch(Exception ex) {
-			session.close();
-			ex.printStackTrace();
-		} finally {
-			session.close();
-		}
+		int chk = session.update("updatePlace", map);
 		return null;
 	}
 	
@@ -91,25 +65,14 @@ public class PlaceDao {
 	 * @return
 	 */
 	public boolean deletePlace(Integer placeSeq, Integer ownnerSeq) {
-		SqlSession session = factory.openSession(false);
-		boolean delYn=false;
 		Map map = new HashMap();
 		map.put("seq", placeSeq);
 		map.put("user_seq", ownnerSeq);
-		try {
-			int check = session.delete("deletePlace", map);
-			if(check > 0) {
-				delYn = true;
-			}
-			session.commit();
-		}catch(Exception ex) {
-			session.rollback();
-			ex.printStackTrace();
-			// throw new DaoException("error", ex);
-		}finally {
-			session.close();
-		}
-		return delYn;
+		int check = session.delete("deletePlace", map);
+		return check > 0;
+	}
+	public PlaceVO findByPlaceName(String placeName) {
+		return session.selectOne("findByPlaceName",placeName);
 	}
 	
 }

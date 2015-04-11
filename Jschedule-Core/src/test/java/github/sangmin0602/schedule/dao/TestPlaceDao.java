@@ -15,7 +15,8 @@ public class TestPlaceDao extends SpringBasedTestCase {
 
 	PlaceDao plsDao ;
 	@Before 
-	public void setUp() {
+	public void setUp() throws Exception {
+		super.setUp();
 		plsDao = ctx.getBean(PlaceDao.class);
 	}
 	@Test
@@ -32,9 +33,10 @@ public class TestPlaceDao extends SpringBasedTestCase {
 //		assertNotNull(pls);
 //		
 //		assertEquals(1, pls.size());
+		int jamesSeq = 1;
 		List<PlaceVO> list;
 		PlaceDao dao = ctx.getBean(PlaceDao.class);
-		list = dao.allPlace(2);
+		list = dao.allPlace(jamesSeq);
 		
 		assertEquals(1, list.size()); 
 	}
@@ -65,12 +67,12 @@ public class TestPlaceDao extends SpringBasedTestCase {
 	
 	@Test
 	public void testDeletePlace() {
-		int placeSeq = 4, jameSeq = 2;
+		int placeSeq = 1, jameSeq = 1;
 		PlaceDao dao = ctx.getBean(PlaceDao.class);
-		dao.deletePlace(placeSeq, jameSeq);
+		assertEquals ( true, dao.deletePlace(placeSeq, jameSeq) );
 		
-		List<PlaceVO> places = dao.allPlace(2);
-		assertEquals ( 1, places.size());
+		List<PlaceVO> places = dao.allPlace(jameSeq);
+		assertEquals ( 0, places.size());
 		
 	}
 	

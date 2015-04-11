@@ -203,6 +203,10 @@ DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`seq`, `nickname`, `email`, `password`, `when_joined`, `deleted`) VALUES
 	(1, 'james', 'james@e.mail', '1111', '2015-03-27 23:15:23', 'N');
+INSERT INTO `places` (`placename`, `description`, `fk_user`) VALUES 
+	('mongchon', '몽촡토성', 1);
+INSERT INTO `schedules` (`fk_creater`, `fk_places`, `starts_at`, `when_registered`) VALUES 
+	(1, 1, '2015-04-11 09:49:13', '2015-04-10 19:49:15');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

@@ -62,22 +62,23 @@ public class UserDao {
 	}
 	
 	/**
-	 * 탈퇴한 사용자로 기록함.
+	 * 탈퇴한 사용자로 기록함( deleted 컬럼값을 'Y'로 바꿔줌.
 	 * @param user
 	 * @return
 	 * @throws DaoException
 	 */
 	public UserVO checkAsDeleted ( UserVO user) throws DaoException {
 		//update시 업데이트 시간관리 어떻게 할지...
-		UserVO uservo = session.selectOne("User.findBySeq", user.getSeq());
-		if(uservo != null) {
-			session.update("updateDeleteYN", uservo.getSeq());
+//		UserVO uservo = session.selectOne("User.findBySeq", user.getSeq());
+		int cnt = session.update("updateDeleteYN", user.getSeq());
+		if ( cnt != 1) {
+			throw new DaoException("fail to check as deleted : " + user );
 		}
 		return user;
 	}
 	
 	/**
-	 * 탈퇴 요청한 사용자들을 삭제함.
+	 * 탈퇴 요청한 사용자들을 삭제함. ( deleted 컬럼값이 'Y' 인 user들을 모두 삭제 )
 	 * @param user
 	 * @return
 	 * @throws DaoException
@@ -85,12 +86,7 @@ public class UserDao {
 	public UserVO delete(UserVO user) throws DaoException {
 		// String  파라미터 한개만 보낼때  HashMap에 담아야하는지 다른방법이 있느지.
 		// User 삭제시 Place 테이블에 관계 있는  seq 같이 삭제
-		// 매번 try catch를 해야하는지?? 다른 방법은 없는지.
-		int deleteChk = session.delete("deleteUser");
-		if(deleteChk != 1) {
-			session.rollback();
-		}
-				
+		session.delete("User.deleteUser");		
 		//Y인것만 지우는건지.
 		//UserVO uservo = session.selectOne("User.findBySeq", user.getSeq());
 		
@@ -119,5 +115,9 @@ public class UserDao {
 			throw new DaoException("fail to update user " + user);
 		}
 		return user;
+	}
+
+	public UserVO findByNickname(String nickName) {
+		return session.selectOne("User.findByNickName",nickName);
 	}
 }

@@ -53,7 +53,7 @@ public class SpringBasedTestCase {
 		/* caching query file data to memory */
 		InputStream queryFileStream = DbTestHelper.class
 				.getClassLoader()
-				.getResourceAsStream(QUERY_TEST_DML);
+				.getResourceAsStream(QUERY_DDL);
 		
 		ByteArrayOutputStream bos = new ByteArrayOutputStream(1024*512);
 		BufferedInputStream bis = new BufferedInputStream(queryFileStream);
@@ -66,7 +66,7 @@ public class SpringBasedTestCase {
 
 		String url = "jdbc:mysql://localhost:3306/test_scheduledb";
 		String user = "root";
-		String password = "123456";
+		String password = "1234";
 		conn = DriverManager.getConnection(url, user, password);
 	}
 	

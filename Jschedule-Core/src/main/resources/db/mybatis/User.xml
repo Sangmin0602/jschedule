@@ -44,4 +44,10 @@
 	<select id="countAllUser" resultType="integer">
 		SELECT count(seq) FROM users WHERE deleted = 'N'
 	</select>
+	
+	<select id="findByNickName" parameterType="String" resultType="User">
+		SELECT
+			seq, nickname, email, password, when_joined as whenJoined, deleted
+		FROM Users where nickname = #{nickName}
+	</select>
 </mapper>

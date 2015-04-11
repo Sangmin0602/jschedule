@@ -8,6 +8,7 @@
 	<typeAliases>
 		<typeAlias type="github.sangmin0602.schedule.UserVO" alias="User"/>
 		<typeAlias type="github.sangmin0602.schedule.PlaceVO" alias="Place"/>
+		<typeAlias type="github.sangmin0602.schedule.ScheduleVO" alias="Schedule"/>
 	</typeAliases>
 	<!-- 
 	<environments default="dev">
@@ -25,5 +26,6 @@
 	<mappers>
 		<mapper resource="db/mybatis/User.xml"/>
 		<mapper resource="db/mybatis/Place.xml"/>
+		<mapper resource="db/mybatis/Schedule.xml"/>
 	</mappers>
 </configuration>
